@@ -28,6 +28,7 @@ preloadImages();
 
 // When page is done loading handle the scroll effect
 window.onload = () => {
+	document.getElementById("loader").style.display = "none";
 	// Draw the first frame
 	images[0].onload = function () {
 		context.drawImage(images[0], 0, 0, canvas.width, canvas.height);
