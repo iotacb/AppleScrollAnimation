@@ -29,11 +29,6 @@ preloadImages();
 // When page is done loading handle the scroll effect
 window.onload = () => {
 	document.getElementById("loader").style.display = "none";
-	// Draw the first frame
-	images[0].onload = function () {
-		context.drawImage(images[0], 0, 0, canvas.width, canvas.height);
-	};
-
 	// Update each frame when scrolling
 	const updateImage = (index) => {
 		// Make sure the index is in the range of the array
@@ -43,6 +38,9 @@ window.onload = () => {
 		// Draw the next frame
 		context.drawImage(images[index], 0, 0, canvas.width, canvas.height);
 	};
+
+	// Draw the first frame
+	updateImage(0);
 
 	// Handle scroll event
 	window.addEventListener("scroll", () => {

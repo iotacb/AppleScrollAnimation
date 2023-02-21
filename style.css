@@ -30,3 +30,21 @@ h1 {
 	color: #fff;
 	font-size: 2rem;
 }
+
+.github {
+	position: fixed;
+	left: 10px;
+	bottom: 10px;
+	border-radius: 50%;
+	background-color: white;
+	width: 60px;
+	aspect-ratio: 1;
+	display: grid;
+	place-content: center;
+	transition: all 0.3s ease;
+}
+
+.github:hover {
+	background-color: #c2c2c2;
+	scale: 0.95;
+}
