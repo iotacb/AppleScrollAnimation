@@ -6,7 +6,6 @@ const frameCount = 79;
 
 const currentFrame = (index) => {
 	const path = `./images/${index.toString().padStart(3, "0")}.png`;
-	console.log(index.toString().padStart(3, "0"));
 	return path;
 };
 
@@ -16,23 +15,30 @@ const images = [];
 // This is done to prevent the images from flickering
 // And that images are not loaded multiple times
 const preloadImages = () => {
-	for (let i = 1; i < frameCount; i++) {
+	for (let i = 1; i <= frameCount; i++) {
 		const img = new Image();
-		img.src = currentFrame(i);
-		images.push(img); // Store the image in the array
+		img.onload = () => {
+			images.push(img); // Store the image in the array
+			if (i == frameCount) {
+				// When last image is finished loading, handle the effect
+				doEffect();
+			}
+		};
+		img.src = currentFrame(i); // Set image source
 	}
 };
 
 // Start loading all images
 preloadImages();
 
-// When page is done loading handle the scroll effect
-window.onload = () => {
+// Will be called when all images have been loaded
+function doEffect() {
+	// Hide loading text
 	document.getElementById("loader").style.display = "none";
 	// Update each frame when scrolling
 	const updateImage = (index) => {
 		// Make sure the index is in the range of the array
-		if (index >= frameCount - 1) return;
+		if (index >= frameCount) return;
 		// Clear the canvas before drawing the next frame
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		// Draw the next frame
@@ -54,4 +60,4 @@ window.onload = () => {
 		// Update the image on the canvas
 		updateImage(frameIndex);
 	});
-};
+}
