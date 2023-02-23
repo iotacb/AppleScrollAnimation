@@ -62,6 +62,8 @@ function doEffect() {
 			Math.round((scrollFraction + Number.EPSILON) * 100) / 100;
 		const frameIndex = Math.floor(map(scrollProgress, 0, 1, 1, frameCount - 1));
 
+		console.log(scrollProgress, frameIndex);
+		
 		// Update the image on the canvas
 		updateImage(frameIndex);
 	});
